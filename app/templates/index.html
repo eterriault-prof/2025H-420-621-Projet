@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu d'échecs</title>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+</head>
+
+<body>
+    <h1>Jeu d'échecs</h1>
+    <canvas id="chessboard" width="400" height="400"></canvas>
+    <script>
+        const socket = io();
+
+        const canvas = document.getElementById('chessboard');
+        const ctx = canvas.getContext('2d');
+        const size = 50;
+
+        // Dessine un échiquier simplifié
+        for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+                ctx.fillStyle = (row + col) % 2 === 0 ? '#fff' : '#000';
+                ctx.fillRect(col * size, row * size, size, size);
+            }
+        }
+
+        // Écoute les mises à jour du serveur
+        socket.on('update_board', (data) => {
+            ctx.fillStyle = data.color;
+            ctx.fillRect(data.x * size, data.y * size, size, size);
+        });
+
+        // Envoie un mouvement au serveur
+        canvas.addEventListener('click', (event) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = Math.floor((event.clientX - rect.left) / size);
+            const y = Math.floor((event.clientY - rect.top) / size);
+            socket.emit('move_piece', { x, y, color: '#f00' });
+        });
+    </script>
+</body>
+
+</html>
