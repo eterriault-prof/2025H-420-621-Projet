@@ -1,6 +1,5 @@
 https://flask.palletsprojects.com/en/stable/tutorial/factory/
 
-
 ---
 
 ## Semaine 1 - Objectifs
@@ -65,3 +64,9 @@ Pour la première semaine, nous mettrons en place la structure de notre applicat
 
 ### **Tests**
 - Vérification des règles et des API avec `test_game.py` et `test_api.py`.
+
+## Lancer le serveur
+Avec cette structure, vous devrez pouvoir lancer votre serveur Flask avec la commande suivante:
+```
+python backend/server/app.py
+```
