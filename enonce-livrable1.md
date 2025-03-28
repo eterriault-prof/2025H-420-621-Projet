@@ -2,71 +2,131 @@ https://flask.palletsprojects.com/en/stable/tutorial/factory/
 
 ---
 
-## Semaine 1 - Objectifs
+# Énoncé de travail - Semaine 1 : Début du développement du jeu d'échecs en ligne
 
-- **Implémenter le moteur du jeu** (classes `Game`, `Piece`, `Board`).  
-- **Mettre en place un serveur Flask** minimal qui affiche une page avec le plateau.  
-- **Créer une interface basique** (HTML/CSS) avec un plateau statique.  
-- **Ajouter les WebSockets** pour la connexion joueur-serveur.  
+## Objectif de la semaine
+Cette semaine, vous commencerez à implémenter les premières fonctionnalités de votre jeu d’échecs. Vous allez :
+- Créer un **plateau interactif** avec **Pygame** pour afficher les pièces d’échecs.
+- Permettre aux joueurs de **cliquer sur une case** pour y placer une pièce.
+- **Valider les mouvements** en empêchant de jouer sur une case déjà occupée.
+- Implémenter les bases de la communication en temps réel entre les joueurs en utilisant **WebSockets**.
 
-## Structure des fichiers
+## Structure du projet et démarrage de l'application
 
-Pour la première semaine, nous mettrons en place la structure de notre application. Voici une sugesstion d'architecture (votre implémentation pourra différer si vous le souhaitez):
+Voir la structure du projet dans le fichier **README.md**. Cette structure contient déjà les fichiers nécessaires et les répertoires pour les templates, les fichiers statiques et les scripts Python.
 
--  chess_project/ (Racine du projet)
-│
-├── - backend/ (Serveur Flask et logique du jeu)
-│ ├── 📂 game/ (Moteur du jeu)
-│ │ ├── __init__.py → Initialise le module
-│ │ ├── game.py → Contient la classe Game, qui gère l'état du jeu
-│ │ ├── piece.py → Définit la classe Piece et ses sous-classes (Pawn, Rook, etc.)
-│ │ ├── rules.py → Implémente la validation des mouvements
-│ │ ├── board.py → Initialise et met à jour le plateau
-│ │
-│ ├── 📂 server/ (Serveur Flask)
-│ │ ├── __init__.py → Initialise le serveur
-│ │ ├── app.py → Gère l’application Flask et les routes
-│ │ ├── websockets.py → Gère la communication WebSockets avec les clients
-│ │
-│ ├── 📂 tests/ (Tests unitaires)
-│ │ ├── test_game.py → Vérifie la logique du jeu
-│ │ ├── test_api.py → Vérifie les routes Flask
-│ │
-│ ├── requirements.txt → Dépendances du projet (Flask, Flask-SocketIO, python-chess, etc.)
-│ ├── config.py → Configuration du projet (paramètres Flask, WebSockets, MQTT)
-│
-├── 📂 frontend/ (Interface utilisateur)
-│ ├── 📂 static/ (Fichiers statiques : CSS, JS, images)
-│ │ ├── style.css → Styles du plateau
-│ │ ├── script.js → Gestion des interactions (mise à jour du plateau, WebSockets)
-│ │
-│ ├── 📂 templates/ (Templates HTML pour Flask)
-│ │ ├── index.html → Interface principale du jeu
-│ │
-│ ├── frontend_app.py → (Optionnel) Un serveur local pour tester le frontend séparément
-│
-├── README.md → Explication du projet et des étapes
+Le **README.md** contiendra également les instructions pour démarrer l'application.
+
+## 1. Le Plateau Interactif avec Pygame
+
+### Objectif :
+Créer un **plateau de jeu interactif** où chaque case peut être cliquée pour déplacer une pièce d'échecs.
+
+### Détails :
+- Utilisez **Pygame** pour afficher le plateau de jeu.
+- Le plateau doit être composé de **64 cases** (8x8) avec des couleurs alternées (noir et blanc).
+- Chaque case doit avoir une taille de **60x60 pixels**.
+- Implémentez l'affichage des **pièces d’échecs** sur le plateau. Les pièces doivent être représentées par des images, que vous pouvez télécharger ou dessiner.
+
+#### Pièces à implémenter :
+- **Pion (Pawn)** : Noir et Blanc
+- **Tour (Rook)** : Noir et Blanc
+- **Cavalier (Knight)** : Noir et Blanc
+- **Fou (Bishop)** : Noir et Blanc
+- **Reine (Queen)** : Noir et Blanc
+- **Roi (King)** : Noir et Blanc
+
+Vous pouvez placer les images des pièces dans le dossier `frontend/assets/` (par exemple : `black_pawn.png`, `white_pawn.png`, etc.).
+
+### Aide :
+Pour afficher et interagir avec les images, vous pouvez utiliser la fonction `blit()` de **Pygame** pour dessiner les pièces sur le plateau.
+
 ---
 
-## Rôles des fichiers
+## 2. Interaction de Base : Placer une Pièce
 
-### **Backend**
-- `game.py` : Gère la logique du jeu.
-- `rules.py` : Vérifie les règles des déplacements.
-- `server/app.py` : Gère l’API Flask et sert le frontend.
-- `websockets.py` : Envoie et reçoit les mises à jour des coups en temps réel.
-- `mqtt_client.py` : (Si utilisé) Publie et souscrit aux messages MQTT.
+### Objectif :
+Permettre aux joueurs de **cliquer sur une case** du plateau et y placer une pièce.
 
-### **Frontend**
-- `index.html` : Affiche le plateau et gère l'affichage des pièces.
-- `script.js` : Écoute les WebSockets et met à jour l'interface.
-- `style.css` : Améliore le rendu visuel du jeu.
+### Détails :
+- Lorsque le joueur clique sur une case vide, une pièce du joueur (noir ou blanc) doit apparaître sur cette case.
+- Vous devez **vérifier si la case est déjà occupée** avant de déplacer une pièce dessus. Si la case est déjà occupée, le mouvement doit être bloqué.
+  
+### Aide :
+Lorsque l'utilisateur clique sur une case (par exemple avec la fonction `pygame.mouse.get_pos()`), vous pouvez obtenir la case sélectionnée et vérifier si elle est vide ou occupée avant de permettre le mouvement de la pièce.
 
-### **Tests**
-- Vérification des règles et des API avec `test_game.py` et `test_api.py`.
+---
 
-## Lancer le serveur
-Avec cette structure, vous devrez pouvoir lancer votre serveur Flask avec la commande suivante:
-```
-python backend/server/app.py
-```
+## 3. Validation des Mouvements
+
+### Objectif :
+Valider les mouvements en **empêchant de jouer sur une case déjà occupée**.
+
+### Détails :
+- Implémentez une **vérification** qui empêche un joueur de déplacer une pièce sur une case déjà occupée par une autre pièce.
+- Les joueurs ne doivent pouvoir jouer que sur les cases **vides** (ou valides selon les règles des échecs).
+  
+### Aide :
+Dans le fichier `game.py`, vous pouvez implémenter la **logique de validation** qui vérifie si la case ciblée par le joueur est vide ou non.
+
+---
+
+## 4. Intégration de WebSockets pour la Communication en Temps Réel
+
+### Objectif :
+Permettre aux deux joueurs d’interagir **en temps réel** pendant la partie.
+
+### Détails :
+- Utilisez **WebSockets** pour permettre la communication entre les deux joueurs.
+- Lorsqu’un joueur déplace une pièce, ce mouvement doit être **envoyé à l’autre joueur** en temps réel via WebSockets. L'autre joueur doit voir le changement immédiatement.
+  
+### Aide :
+- Créez un fichier `websockets.py` dans lequel vous gérerez la logique de connexion et d'envoi/recevoir de messages via WebSockets.
+- Dans `app.py`, vous pouvez initialiser le serveur Flask et ajouter le serveur WebSocket pour gérer les connexions.
+
+```python
+# Exemple d'initialisation d'un serveur WebSocket avec Flask
+from flask import Flask, render_template
+from flask_socketio import SocketIO
+
+app = Flask(__name__)
+socketio = SocketIO(app)
+
+@socketio.on('move_piece')
+def handle_move(data):
+    # Gérer le mouvement de la pièce ici
+    pass
+
+if __name__ == '__main__':
+    socketio.run(app)
+
+Livrables de la Semaine 1
+Fichiers à soumettre :
+game.py : Logique du jeu (validation des mouvements, gestion du plateau, etc.).
+
+websockets.py : Gérer les connexions WebSocket et les échanges de messages entre les joueurs.
+
+script.js : Code JavaScript pour gérer les interactions avec le front-end (cliquer sur une case, déplacer une pièce).
+
+Plateau interactif Pygame : Utilisation de Pygame pour afficher le plateau et les pièces, et permettre l’interaction de base.
+
+Instructions pour lancer l'application :
+Installez les dépendances nécessaires via pip install -r requirements.txt.
+
+Exécutez le serveur Flask via python backend/server/app.py.
+
+Lancez le front-end avec python frontend/app.py ou en ouvrant frontend/templates/index.html dans votre navigateur.
+
+Accédez au jeu en ouvrant votre navigateur à l'adresse http://localhost:5000.
+
+Critères d'évaluation :
+Interactivité du plateau : Le plateau s'affiche correctement et permet de déplacer les pièces via des clics.
+
+Validation des mouvements : Les joueurs ne peuvent pas déplacer une pièce sur une case déjà occupée.
+
+Communication en temps réel avec WebSockets : Les mouvements des pièces sont visibles en temps réel par l'autre joueur.
+
+🎯 Conseils :
+Prenez votre temps pour bien comprendre la logique de placement des pièces et la communication WebSocket.
+
+N'oubliez pas de tester chaque fonctionnalité au fur et à mesure pour éviter les bugs.
