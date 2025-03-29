@@ -1,6 +1,7 @@
 class Game:
     def __init__(self):
-        self.board = None  # Initialisation du plateau
+        from .board import Board
+        self.board = Board()  # Initialisation du plateau
         self.current_player = 'white'
 
     def start_game(self):
