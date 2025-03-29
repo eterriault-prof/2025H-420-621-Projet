@@ -1,1 +1,1 @@
-console.log('Script chargé');
+console.log("Script chargé.")
