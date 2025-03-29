@@ -76,7 +76,8 @@ board.addEventListener("click", function(event) {
   - Vous pouvez utiliser Pygame, Canvas, ou HTML/CSS pour l'affichage du plateau.
 
 **Note sur l'utilisation de l'IA:**
-L'utilisation de l'IA est autorisée et même encouragée pour vous aider dans votre travail. Cependant, lors de l'évaluation finale, vous devrez être en mesure d'expliquer votre code, justifier vos choix de conception et répondre à des questions sur son fonctionnement. Assurez-vous donc de bien comprendre ce que vous utilisez, comme dans un contexte professionnel réel.
+L'utilisation de l'IA est autorisée et même encouragée pour vous aider dans votre travail. Cependant, lors de l'évaluation finale, vous devrez être en mesure d'expliquer votre code, justifier vos choix de conception et répondre à des questions sur son fonctionnement. Assurez-vous donc de bien comprendre ce que vous utilisez, comme dans un contexte professionnel réel.  
+
 ---
 
 ## **Étapes suggérées**
@@ -125,44 +126,3 @@ L'utilisation de l'IA est autorisée et même encouragée pour vous aider dans v
   - Quelles difficultés ont été rencontrées.
 
 Le journal de bord doit être déposé dans Léa au plus tard le dimanche 6 avril à minuit.
-
----
-
-## **Méthodologies de travail (optionnelles mais recommandées)**
-
-### **1. Environnement de travail (virtualenv)**
-#### Activation de l’environnement virtuel dans VS Code :
-```bash
-python -m venv venv
-source venv/bin/activate  # Sur Mac/Linux
-venv\Scripts\activate    # Sur Windows
-```
-
-- Pour installer les dépendances :
-  ```bash
-  pip install -r requirements.txt
-  ```
-- Pour enregistrer les dépendances installées :
-  ```bash
-  pip freeze > requirements.txt
-  ```
-
-### **2. Utilisation de GitHub**
-#### **Configurer Git avec SSH**
-```bash
-git config --global user.name "VotreNom"
-git config --global user.email "VotreEmail"
-ssh-keygen -t rsa -b 4096 -C "VotreEmail"
-```
-Ajoutez votre clé publique à GitHub (`~/.ssh/id_rsa.pub` ou `C:\Users\VotreNom\.ssh\id_rsa.pub` sur Windows).
-
-#### **Commandes Git essentielles**
-```bash
-git init
-git remote add origin git@github.com:votre-repo.git
-git add .
-git commit -m "Premier commit"
-git push -u origin main
-```
----
-
