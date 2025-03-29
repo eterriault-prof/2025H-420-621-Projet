@@ -18,7 +18,7 @@ Chaque semaine, des indications spécifiques seront fournies pour guider le dév
 1. Activer l'environnement virtuel (optionnel mais recommandé)
 ```bash
 cd app/backend  # Aller dans le dossier backend
-python -m venv venv       # Créer un environnement virtuel
+python -m venv .venv       # Créer un environnement virtuel
 source venv/bin/activate  # Activer sur macOS/Linux
 venv\Scripts\activate     # Activer sur Windows
 ```
