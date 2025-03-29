@@ -1,4 +1,5 @@
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit
+from .app import socketio, game
 
 socketio = SocketIO()
 
