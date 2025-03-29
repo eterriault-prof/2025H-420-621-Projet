@@ -83,25 +83,28 @@ L'utilisation de l'IA est autorisée et même encouragée pour vous aider dans v
 ## **Étapes suggérées**
 
 1. **Affichage du plateau**
-   - Complétez `frontend/index.html` pour inclure un canevas (`canvas`) ou une grille avec `<div>`.
-   - Ajoutez le CSS nécessaire pour styliser le plateau (`frontend/static/style.css`).
+   - Complétez `frontend/static/script.js` et `frontend/templates/index.html` pour utiliser un `canvas` qui affichera une grille 8x8.
+   - Ajustez le CSS si nécessaire pour styliser le plateau (`frontend/static/style.css`).
+  
+2. **Logique de jeu**
+   - Ajoutez la logique nécessaire aux classes Game et Board pour l'initialisation du plateau et des pièces.
+   - Ajoutez l'initialisation des objets aux bons endroits
+  
+3. **Mise en place des WebSockets**
+   - Dans `app.py`, faites l'initialisation de SocketIO et lancez l'application avec socketio.
+   - Dans `script.js`, utilisez `socket.emit("get_board");` pour demander l’état du jeu.
+   - Dans `websockets.py`, ajoutez un événement `@socketio.on("get_board")` pour envoyer le plateau au frontend, soit envoyer un `socket.emit("update_board")`
+   - Ajoutez `socket.on("update_board", function(data) {...});` pour recevoir et afficher les mises à jour du plateau.
+     En premier, ne faites que l'affichage de message dans ces fonctions pour vous assurer qu'elles sont bien appelées. Ensuite, rajoutez la logique et l'envoi d'informations.
 
-2. **Ajout des pièces sur le plateau**
+3. **Ajout des pièces sur le plateau**
    - Complétez `script.js` pour afficher les images des pièces.
    - Vérifiez que les pièces sont bien placées au chargement.
 
-3. **Gestion des événements de clic**
+4. **Gestion des événements de clic**
    - Dans `script.js`, écoutez les clics sur le plateau.
    - Affichez dans la console les coordonnées de la case cliquée.
 
-4. **Mise en place des WebSockets**
-   - Dans `websockets.py`, ajoutez un événement `@socketio.on("get_board")` pour envoyer le plateau au frontend.
-   - Dans `script.js`, utilisez `socket.emit("get_board");` pour demander l’état du jeu.
-   - Ajoutez `socket.on("update_board", function(data) {...});` pour recevoir et afficher les mises à jour du plateau.
-
-5. **Test et débogage**
-   - Vérifiez dans la console si les messages WebSocket passent bien.
-   - Testez différents clics et assurez-vous que les coordonnées affichées sont correctes.
 
 ---
 ## **Conseils et bonnes pratiques**
