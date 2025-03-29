@@ -6,6 +6,8 @@ const ctx = canvas.getContext('2d');
 const boardSize = 480;
 const squareSize = boardSize / 8;
 
+let selectedPiece = null;
+
 // État du jeu (sera mis à jour par le serveur)
 let chessBoard = Array(8).fill().map(() => Array(8).fill(''));
 let piecesMap = {
@@ -61,6 +63,29 @@ socket.on('board_update', function (data) {
         drawBoard();
     } else {
         console.error("Invalid board data received:", data);
+    }
+});
+
+canvas.addEventListener('click', function (event) {
+    const x = event.offsetX;
+    const y = event.offsetY;
+    const row = Math.floor(y / squareSize);
+    const col = Math.floor(x / squareSize);
+
+    console.log(`Clicked on square: (${row}, ${col})`);
+
+    if (!selectedPiece) {
+        // Sélectionner une pièce si la case contient une pièce
+        if (chessBoard[row][col] !== '') {
+            selectedPiece = { row, col };
+        }
+    } else {
+        // Déplacer la pièce si elle est sélectionnée
+        socket.emit('move_piece', {
+            start: [selectedPiece.row, selectedPiece.col],
+            end: [row, col]
+        });
+        selectedPiece = null;
     }
 });
 
