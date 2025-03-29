@@ -1,15 +1,19 @@
-# 420-621-Projet
+# 420-621-Projet : Jeu d'échecs multi-joueurs
 
-## Description
-Un jeu d'échecs multi-joueurs qui peut être joué à deux ou seul contre une IA. Le jeu utilise Python, Pygame pour l'interface graphique, Flask pour le serveur web, et WebSockets pour la communication en temps réel.
+## **Description**
+Bienvenue dans le projet de jeu d'échecs multi-joueurs, développé dans le cadre du cours **420-621**. Ce projet s'étalera sur **4 semaines** et sera réalisé en **équipe de 2**. L'objectif est de concevoir un jeu d'échecs fonctionnel, jouable à deux ou contre une IA, avec une interface web interactive et une communication en temps réel via WebSockets.
 
-## Technologies utilisées
-- Python
-- Pygame
-- Flask
-- WebSockets
+Chaque semaine, des indications spécifiques seront fournies pour guider le développement. Un **journal de bord** devra être déposé sur Léa chaque dimanche avant minuit pour documenter vos progrès. La **présentation et l'évaluation** du projet auront lieu lors de la **5e semaine** (semaine 14).
 
-## Instructions
+---
+## **Technologies utilisées**
+- **WebSockets** : Communication en temps réel entre les joueurs.
+- **Flask** : Framework web pour le backend.
+- **Python** : Langage principal pour la logique du jeu.
+- **Pygame** : (Si applicable) pour des animations ou une interface graphique alternative.
+
+---
+## **Instructions pour démarrer**
 
 1. Activer l'environnement virtuel (optionnel mais recommandé)
 ```bash
@@ -28,20 +32,49 @@ venv\Scripts\activate     # Activer sur Windows
    cd backend
    python -m server.app
    ```
-3. Ouvrez le jeu dans votre navigateur à l'adresse `http://<adresse_du_serveur>:5000`.
+4. Ouvrez le jeu dans votre navigateur à l'adresse `http://<adresse_du_serveur>:5000`.
 
-## Fonctionnalités prévues
-- Jeu local à deux joueurs.
-- Jeu contre une IA.
-- Jeu en ligne via WebSockets.
+---
+
+## **Gestion du projet avec Git (optionnel mais recommandé)**
+
+Bien que l'utilisation de Git ne soit pas obligatoire, elle est fortement recommandée pour suivre les modifications de votre projet, collaborer efficacement avec votre coéquipier, et sauvegarder votre travail sur GitHub.
+
+Pour des instructions détaillées sur la configuration de Git, la création d'un dépôt GitHub, et la gestion des commits et des pushs, consultez le fichier [git_setup.md](git_setup.md) à la racine du projet.
+
+---
+
+## **Fonctionnalités prévues**
+### **Semaine 1 : Mise en place de la structure et des bases**
+- Initialisation du projet et mise en place de la structure des fichiers.
+- Création d'un échiquier statique affiché dans le navigateur.
+- Développement de la logique de base pour les mouvements des pièces.
+
+### **Semaine 2 : Communication en temps réel**
+- Intégration de WebSockets pour permettre le jeu multi-joueurs.
+- Gestion des événements de connexion et de déconnexion des joueurs.
+- Synchronisation des coups entre les clients.
+
+### **Semaine 3 : Intelligence artificielle**
+- Implémentation d'une IA pour permettre le jeu en solo.
+- Utilisation d'une bibliothèque comme `python-chess` ou `Stockfish` pour les mouvements de l'IA.
+- Gestion des modes de jeu (multi-joueur ou contre l'IA).
+
+### **Semaine 4 : Finalisation et tests**
+- Ajout des fonctionnalités finales (par exemple, détection des échecs et mat).
+- Tests unitaires et d'intégration pour valider le bon fonctionnement.
+- Amélioration de l'interface utilisateur (styles CSS, animations, etc.).
+
+---
 
 ## Structure des fichiers
 
-Pour la première semaine, nous mettrons en place la structure de notre application. Voici une sugesstion d'architecture (votre implémentation pourra différer si vous le souhaitez):
+Voici une suggestion d'architecture pour organiser le projet :
 
--  chess_project/ (Racine du projet)
+```text
+|📂 app/ (Racine du projet)
 │
-├── - backend/ (Serveur Flask et logique du jeu)
+├──📂 backend/ (Serveur Flask et logique du jeu)
 │ ├── 📂 game/ (Moteur du jeu)
 │ │ ├── __init__.py → Initialise le module
 │ │ ├── game.py → Contient la classe Game, qui gère l'état du jeu
@@ -59,22 +92,20 @@ Pour la première semaine, nous mettrons en place la structure de notre applicat
 │ │ ├── test_api.py → Vérifie les routes Flask
 │ │
 │ ├── requirements.txt → Dépendances du projet (Flask, Flask-SocketIO, python-chess, etc.)
-│ ├── config.py → Configuration du projet (paramètres Flask, WebSockets, MQTT)
+│ ├── config.py → Configuration du projet (paramètres Flask, WebSockets)
 │
 ├── 📂 frontend/ (Interface utilisateur)
 │ ├── 📂 static/ (Fichiers statiques : CSS, JS, images)
+│ | ├── 📂 assets/
+│ | | ├── black_pawn.png
+│ | | ├── white_pawn.png
+│ | | └── ...
 │ │ ├── style.css → Styles du plateau
 │ │ ├── script.js → Gestion des interactions (mise à jour du plateau, WebSockets)
 │ │
 │ ├── 📂 templates/ (Templates HTML pour Flask)
 │ │ ├── index.html → Interface principale du jeu
-│ │
-│ ├── 📂 assets/
-│   ├── black_pawn.png
-│   ├── white_pawn.png
-│   └── ...
-│ ├── frontend_app.py → (Optionnel) Un serveur local pour tester le frontend séparément
-├── README.md → Explication du projet et des étapes
+```
 ---
 
 ## Rôles des fichiers
@@ -84,7 +115,6 @@ Pour la première semaine, nous mettrons en place la structure de notre applicat
 - `rules.py` : Vérifie les règles des déplacements.
 - `server/app.py` : Gère l’API Flask et sert le frontend.
 - `websockets.py` : Envoie et reçoit les mises à jour des coups en temps réel.
-- `mqtt_client.py` : (Si utilisé) Publie et souscrit aux messages MQTT.
 
 ### **Frontend**
 - `index.html` : Affiche le plateau et gère l'affichage des pièces.
@@ -93,3 +123,14 @@ Pour la première semaine, nous mettrons en place la structure de notre applicat
 
 ### **Tests**
 - Vérification des règles et des API avec `test_game.py` et `test_api.py`.
+
+---
+## **Évaluation**
+- **Journal de bord** : À déposer chaque semaine sur Léa avant dimanche minuit.
+- **Présentation finale** : Semaine 14 (5e semaine du projet).
+- **Critères d'évaluation** :
+  - Fonctionnalité (jeu jouable, IA fonctionnelle, etc.).
+  - Qualité du code (organisation, clarté, tests).
+  - Interface utilisateur (design, ergonomie).
+  - Travail d'équipe (documentation, journal de bord).
+---
