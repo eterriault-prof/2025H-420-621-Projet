@@ -5,6 +5,11 @@ Bienvenue dans le projet de jeu d'échecs multi-joueurs, développé dans le cad
 
 Chaque semaine, des indications spécifiques seront fournies pour guider le développement. Un **journal de bord** devra être déposé sur Léa chaque dimanche avant minuit pour documenter vos progrès. La **présentation et l'évaluation** du projet auront lieu lors de la **5e semaine** (semaine 14).
 
+## Évaluation
+Lors de la 5e semaine du projet, chaque étudiant devra présenter sa solution, en expliquant les choix de conception, en faisant une démonstration de l'application et en répondant aux questions du professeur.
+Chaque équipe présentera à tour de rôle leur projet, selon un ordre pré-établi.
+La grille d'évaluation du projet se trouve [ici](https://cmaisonneuveqcca-my.sharepoint.com/:x:/g/personal/eterriault_cmaisonneuve_qc_ca/EV6TFQNx_o1Ko-Jl604Wn28B9TnuOxS9cKd5_EG0wPLMjA?e=MM26cH).
+
 ---
 ## **Technologies utilisées**
 - **WebSockets** : Communication en temps réel entre les joueurs.
