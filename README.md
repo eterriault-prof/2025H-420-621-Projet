@@ -55,20 +55,19 @@ Pour des instructions détaillées sur la configuration de Git, la création d'u
 - Création d'un échiquier statique affiché dans le navigateur.
 - Développement de la logique de base pour les mouvements des pièces.
 
-### **Semaine 2 : Communication en temps réel**
-- Intégration de WebSockets pour permettre le jeu multi-joueurs.
+### **Semaine 2 : Implémentation de la logique de jeu**
+- Implémentation des règles et de la logique de jeu.
+- Gestion de la fin de jeu et du tour des joueurs.
+
+### **Semaine 3 : Jeu mode multi-joueurs**
+- Intégration du jeu multi-joueurs.
 - Gestion des événements de connexion et de déconnexion des joueurs.
 - Synchronisation des coups entre les clients.
 
-### **Semaine 3 : Intelligence artificielle**
+### **Semaine 4 : Jeu mode solo**
 - Implémentation d'une IA pour permettre le jeu en solo.
-- Utilisation d'une bibliothèque comme `python-chess` ou `Stockfish` pour les mouvements de l'IA.
 - Gestion des modes de jeu (multi-joueur ou contre l'IA).
-
-### **Semaine 4 : Finalisation et tests**
-- Ajout des fonctionnalités finales (par exemple, détection des échecs et mat).
-- Tests unitaires et d'intégration pour valider le bon fonctionnement.
-- Amélioration de l'interface utilisateur (styles CSS, animations, etc.).
+- (Facultatif) Utilisation d'une bibliothèque comme `Stockfish` pour les mouvements de l'IA.
 
 ---
 
@@ -129,13 +128,4 @@ Voici une suggestion d'architecture pour organiser le projet :
 ### **Tests**
 - Vérification des règles et des API avec `test_game.py` et `test_api.py`.
 
----
-## **Évaluation**
-- **Journal de bord** : À déposer chaque semaine sur Léa avant dimanche minuit.
-- **Présentation finale** : Semaine 14 (5e semaine du projet).
-- **Critères d'évaluation** :
-  - Fonctionnalité (jeu jouable, IA fonctionnelle, etc.).
-  - Qualité du code (organisation, clarté, tests).
-  - Interface utilisateur (design, ergonomie).
-  - Travail d'équipe (documentation, journal de bord).
 ---
