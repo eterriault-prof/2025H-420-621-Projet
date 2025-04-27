@@ -26,8 +26,8 @@ Chaque membre de l'équipe se verra attribué la même note **à moins qu'un dé
 ```bash
 cd app/backend  # Aller dans le dossier backend
 python -m venv .venv       # Créer un environnement virtuel
-source venv/bin/activate  # Activer sur macOS/Linux
-venv\Scripts\activate     # Activer sur Windows
+source .venv/bin/activate  # Activer sur macOS/Linux
+.venv\Scripts\activate     # Activer sur Windows
 ```
 
 2. Installez les dépendances :
